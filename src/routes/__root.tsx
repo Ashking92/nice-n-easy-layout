@@ -97,6 +97,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
       },
     ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Budget Homes",
+        url: "/",
+        description: "Quality residences at budget-friendly prices in Nalasopara, Boisar, Palghar, and Umroli.",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Shop No. C 118, 1st Floor, C Wing, Icchapurti Sai Prestige CHS Ltd, Taki Virar Road, Near Dutt Mandir",
+          addressLocality: "Nalasopara East",
+          addressRegion: "Maharashtra",
+          postalCode: "401209",
+          addressCountry: "IN",
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+91-8828300415",
+          contactType: "sales",
+          availableLanguage: ["English", "Hindi", "Marathi"],
+        },
+        sameAs: [
+          "http://wa.link/a8stio",
+        ],
+      }),
+    }],
   }),
 
   shellComponent: RootShell,

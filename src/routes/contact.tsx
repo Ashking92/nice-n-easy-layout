@@ -14,7 +14,35 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Get in touch with the Budget Homes team in Nalasopara East, Maharashtra. We respond within 24 business hours." },
       { property: "og:title", content: "Contact Us — Budget Homes" },
       { property: "og:description", content: "Talk to our property experts in Maharashtra." },
+      { property: "og:url", content: "/contact" },
     ],
+    links: [
+      { rel: "canonical", href: "/contact" },
+    ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        name: "Contact Us",
+        url: "/contact",
+        description: "Get in touch with the Budget Homes team in Nalasopara East, Maharashtra.",
+        mainEntity: {
+          "@type": "Organization",
+          name: "Budget Homes",
+          telephone: "+91-8828300415",
+          email: "ashish.budgethomes@gmail.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Shop No. C 118, 1st Floor, C Wing, Icchapurti Sai Prestige CHS Ltd, Taki Virar Road, Near Dutt Mandir",
+            addressLocality: "Nalasopara East",
+            addressRegion: "Maharashtra",
+            postalCode: "401209",
+            addressCountry: "IN",
+          },
+        },
+      }),
+    }],
   }),
   component: ContactPage,
 });
