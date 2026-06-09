@@ -46,7 +46,40 @@ export const Route = createFileRoute("/properties")({
       { name: "description", content: "Explore high-quality, affordable property listings in Nalasopara, Boisar, Palghar, and Umroli." },
       { property: "og:title", content: "Available Properties | Budget Homes" },
       { property: "og:description", content: "Browse 24 budget-friendly homes across Maharashtra." },
+      { property: "og:url", content: "/properties" },
     ],
+    links: [
+      { rel: "canonical", href: "/properties" },
+    ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Available Properties",
+        url: "/properties",
+        description: "Explore high-quality, affordable property listings in Nalasopara, Boisar, Palghar, and Umroli.",
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: PROPERTIES.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Product",
+              name: p.name,
+              description: `${p.bhk} apartment in ${p.location}. Starting at ${p.price}.`,
+              image: p.img,
+              offers: {
+                "@type": "Offer",
+                price: String(parseFloat(p.price.replace("₹", "").replace(" L+", "")) * 100000),
+                priceCurrency: "INR",
+                availability: "https://schema.org/InStock",
+              },
+            },
+          })),
+        },
+      }),
+    }],
   }),
   component: PropertiesPage,
 });

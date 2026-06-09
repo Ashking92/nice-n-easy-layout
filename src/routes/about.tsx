@@ -10,7 +10,26 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "Learn about Budget Homes — making quality home ownership a reality across Maharashtra." },
       { property: "og:title", content: "About Budget Homes" },
       { property: "og:description", content: "Making quality home ownership a reality for everyone." },
+      { property: "og:url", content: "/about" },
     ],
+    links: [
+      { rel: "canonical", href: "/about" },
+    ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "About Us",
+        url: "/about",
+        description: "Learn about Budget Homes — making quality home ownership a reality across Maharashtra.",
+        mainEntity: {
+          "@type": "AboutPage",
+          name: "About Budget Homes",
+          description: "Budget Homes was founded with a simple belief: home ownership should be within everyone's reach.",
+        },
+      }),
+    }],
   }),
   component: AboutPage,
 });

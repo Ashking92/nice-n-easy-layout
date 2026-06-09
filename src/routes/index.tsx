@@ -41,7 +41,26 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Budget Homes — Affordable Quality Living" },
       { property: "og:description", content: "Discover budget-friendly apartments and homes in Maharashtra." },
       { property: "og:image", content: HERO_IMG },
+      { property: "og:url", content: "/" },
     ],
+    links: [
+      { rel: "canonical", href: "/" },
+    ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Budget Homes",
+        url: "/",
+        description: "Discover budget-friendly apartments and homes in Nalasopara, Boisar, Palghar, and Umroli.",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: "/properties?q={search_term_string}",
+          "query-input": "required name=search_term_string",
+        },
+      }),
+    }],
   }),
   component: HomePage,
 });

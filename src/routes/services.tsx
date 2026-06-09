@@ -18,7 +18,44 @@ export const Route = createFileRoute("/services")({
       { property: "og:title", content: "Services & Investment — Budget Homes" },
       { property: "og:description", content: "Expert services for intelligent real estate decisions." },
       { property: "og:image", content: HERO },
+      { property: "og:url", content: "/services" },
     ],
+    links: [
+      { rel: "canonical", href: "/services" },
+    ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Services & Investment",
+        url: "/services",
+        description: "Home buying assistance, investment opportunities, and property management services from Budget Homes.",
+        mainEntity: [
+          {
+            "@type": "Service",
+            serviceType: "Home Buying Assistance",
+            provider: { "@type": "Organization", name: "Budget Homes" },
+            areaServed: { "@type": "City", name: "Nalasopara, Boisar, Palghar, Umroli" },
+            description: "Expert guidance from search to keys, including legal and financial advisory.",
+          },
+          {
+            "@type": "Service",
+            serviceType: "Investment Opportunities",
+            provider: { "@type": "Organization", name: "Budget Homes" },
+            areaServed: { "@type": "City", name: "Nalasopara, Boisar, Palghar, Umroli" },
+            description: "High-appreciation properties with data-driven recommendations.",
+          },
+          {
+            "@type": "Service",
+            serviceType: "Property Management",
+            provider: { "@type": "Organization", name: "Budget Homes" },
+            areaServed: { "@type": "City", name: "Nalasopara, Boisar, Palghar, Umroli" },
+            description: "Tenant sourcing, maintenance and transparent reports.",
+          },
+        ],
+      }),
+    }],
   }),
   component: ServicesPage,
 });
