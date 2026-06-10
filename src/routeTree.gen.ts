@@ -11,12 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
-import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PropertiesIndexRouteImport } from './routes/properties.index'
 import { Route as PropertiesSlugRouteImport } from './routes/properties.$slug'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
@@ -33,11 +33,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PropertiesRoute = PropertiesRouteImport.update({
-  id: '/properties',
-  path: '/properties',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -62,6 +57,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
+  id: '/properties/',
+  path: '/properties/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropertiesSlugRoute = PropertiesSlugRouteImport.update({
@@ -109,11 +109,11 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/properties': typeof PropertiesRouteWithChildren
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/properties/$slug': typeof PropertiesSlugRoute
+  '/properties/': typeof PropertiesIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/admin/properties/$id': typeof AuthenticatedAdminPropertiesIdRoute
@@ -125,10 +125,10 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/properties': typeof PropertiesRouteWithChildren
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/properties/$slug': typeof PropertiesSlugRoute
+  '/properties': typeof PropertiesIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/admin/properties/$id': typeof AuthenticatedAdminPropertiesIdRoute
@@ -142,11 +142,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/properties': typeof PropertiesRouteWithChildren
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/properties/$slug': typeof PropertiesSlugRoute
+  '/properties/': typeof PropertiesIndexRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/admin/properties/$id': typeof AuthenticatedAdminPropertiesIdRoute
@@ -160,11 +160,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
-    | '/properties'
     | '/services'
     | '/sitemap.xml'
     | '/admin'
     | '/properties/$slug'
+    | '/properties/'
     | '/admin/content'
     | '/admin/'
     | '/admin/properties/$id'
@@ -176,10 +176,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
-    | '/properties'
     | '/services'
     | '/sitemap.xml'
     | '/properties/$slug'
+    | '/properties'
     | '/admin/content'
     | '/admin'
     | '/admin/properties/$id'
@@ -192,11 +192,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
-    | '/properties'
     | '/services'
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/properties/$slug'
+    | '/properties/'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/'
     | '/_authenticated/admin/properties/$id'
@@ -210,9 +210,9 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
-  PropertiesRoute: typeof PropertiesRouteWithChildren
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  PropertiesIndexRoute: typeof PropertiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -229,13 +229,6 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/properties': {
-      id: '/properties'
-      path: '/properties'
-      fullPath: '/properties'
-      preLoaderRoute: typeof PropertiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -271,6 +264,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/properties/': {
+      id: '/properties/'
+      path: '/properties'
+      fullPath: '/properties/'
+      preLoaderRoute: typeof PropertiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/properties/$slug': {
@@ -356,27 +356,15 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface PropertiesRouteChildren {
-  PropertiesSlugRoute: typeof PropertiesSlugRoute
-}
-
-const PropertiesRouteChildren: PropertiesRouteChildren = {
-  PropertiesSlugRoute: PropertiesSlugRoute,
-}
-
-const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
-  PropertiesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
-  PropertiesRoute: PropertiesRouteWithChildren,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  PropertiesIndexRoute: PropertiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
