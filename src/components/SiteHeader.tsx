@@ -1,4 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useAuth } from "@/hooks/useAuth";
 
 const links = [
   { to: "/", label: "Home" },
@@ -10,6 +11,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, isAdmin } = useAuth();
   return (
     <header className="bg-surface sticky top-0 z-50 w-full border-b border-outline-variant">
       <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20 w-full">
@@ -34,18 +36,19 @@ export function SiteHeader() {
             );
           })}
         </nav>
-        <div className="flex items-center gap-6">
-          <div className="relative hidden lg:block">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-            <input
-              className="pl-10 pr-4 py-2 bg-paper-white border border-outline-variant rounded-lg text-label-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none w-64 transition-all"
-              placeholder="Search..."
-              type="text"
-            />
-          </div>
-          <button className="bg-deep-navy text-on-primary px-6 py-2.5 rounded-lg font-label-lg hover:opacity-90 active:scale-95 transition-all">
+        <div className="flex items-center gap-4">
+          {isAdmin ? (
+            <Link to="/admin" className="hidden md:inline-flex items-center gap-1 text-label-lg text-primary hover:underline">
+              <span className="material-symbols-outlined text-base">admin_panel_settings</span> Admin
+            </Link>
+          ) : !user ? (
+            <Link to="/auth" className="hidden md:inline-flex text-label-lg text-on-surface-variant hover:text-primary">
+              Sign in
+            </Link>
+          ) : null}
+          <a href="http://wa.link/a8stio" target="_blank" rel="noreferrer" className="bg-deep-navy text-on-primary px-6 py-2.5 rounded-lg font-label-lg hover:opacity-90 active:scale-95 transition-all">
             List Property
-          </button>
+          </a>
         </div>
       </div>
     </header>
