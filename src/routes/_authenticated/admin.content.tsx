@@ -31,9 +31,9 @@ function ContentEditor() {
 
   useEffect(() => {
     if (!data) return;
-    if (data.hero) setHero({ ...hero, ...data.hero });
-    if (data.contact) setContact({ ...contact, ...data.contact });
-    if (data.about) setAbout({ ...about, ...data.about });
+    if (data.hero) setHero((prev) => ({ ...prev, ...data.hero }));
+    if (data.contact) setContact((prev) => ({ ...prev, ...data.contact }));
+    if (data.about) setAbout((prev) => ({ ...prev, ...data.about }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 

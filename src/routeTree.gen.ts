@@ -65,9 +65,9 @@ const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropertiesSlugRoute = PropertiesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => PropertiesRoute,
+  id: '/properties/$slug',
+  path: '/properties/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
@@ -212,6 +212,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  PropertiesSlugRoute: typeof PropertiesSlugRoute
   PropertiesIndexRoute: typeof PropertiesIndexRoute
 }
 
@@ -275,10 +276,10 @@ declare module '@tanstack/react-router' {
     }
     '/properties/$slug': {
       id: '/properties/$slug'
-      path: '/$slug'
+      path: '/properties/$slug'
       fullPath: '/properties/$slug'
       preLoaderRoute: typeof PropertiesSlugRouteImport
-      parentRoute: typeof PropertiesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
@@ -364,6 +365,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  PropertiesSlugRoute: PropertiesSlugRoute,
   PropertiesIndexRoute: PropertiesIndexRoute,
 }
 export const routeTree = rootRouteImport
