@@ -14,16 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      properties: {
+        Row: {
+          address: string
+          amenities: string[]
+          bathrooms: number
+          bedrooms: number
+          bhk: string
+          created_at: string
+          description: string
+          featured: boolean
+          floor_info: string
+          gallery: string[]
+          hero_image: string
+          highlights: string[]
+          id: string
+          location: string
+          long_description: string
+          map_url: string | null
+          name: string
+          parking: number
+          possession: string
+          price_label: string
+          price_numeric: number | null
+          property_type: string
+          rera_id: string | null
+          size_sqft: string
+          slug: string
+          sort_order: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string
+          amenities?: string[]
+          bathrooms?: number
+          bedrooms?: number
+          bhk: string
+          created_at?: string
+          description?: string
+          featured?: boolean
+          floor_info?: string
+          gallery?: string[]
+          hero_image: string
+          highlights?: string[]
+          id?: string
+          location: string
+          long_description?: string
+          map_url?: string | null
+          name: string
+          parking?: number
+          possession?: string
+          price_label: string
+          price_numeric?: number | null
+          property_type?: string
+          rera_id?: string | null
+          size_sqft: string
+          slug: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          amenities?: string[]
+          bathrooms?: number
+          bedrooms?: number
+          bhk?: string
+          created_at?: string
+          description?: string
+          featured?: boolean
+          floor_info?: string
+          gallery?: string[]
+          hero_image?: string
+          highlights?: string[]
+          id?: string
+          location?: string
+          long_description?: string
+          map_url?: string | null
+          name?: string
+          parking?: number
+          possession?: string
+          price_label?: string
+          price_numeric?: number | null
+          property_type?: string
+          rera_id?: string | null
+          size_sqft?: string
+          slug?: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value?: Json
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +287,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
