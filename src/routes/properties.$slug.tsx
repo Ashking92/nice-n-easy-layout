@@ -83,8 +83,11 @@ export const Route = createFileRoute("/properties/$slug")({
 
 function PropertyDetail() {
   const { slug } = Route.useParams();
+  const qc = useQueryClient();
   const { data: p } = useQuery(propertyQuery(slug));
+  useRealtimeSubscription("properties", () => qc.invalidateQueries({ queryKey: ["property", "slug", slug] }));
   if (!p) return null;
+
 
   return (
     <div className="bg-surface text-on-surface min-h-screen flex flex-col">
