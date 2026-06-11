@@ -23,6 +23,7 @@ const propertyQuery = (slug: string) => ({
 });
 
 export const Route = createFileRoute("/properties/$slug")({
+  ssr: false,
   loader: ({ params, context }) => context.queryClient.ensureQueryData(propertyQuery(params.slug)),
   head: ({ loaderData }) => {
     const p = loaderData as any;
