@@ -37,7 +37,10 @@ export const Route = createFileRoute("/properties/")({
 });
 
 function PropertiesPage() {
+  const qc = useQueryClient();
   const { data: properties = [] } = useQuery(propertiesQuery);
+  useRealtimeSubscription("properties", () => qc.invalidateQueries({ queryKey: ["properties", "list"] }));
+
   const [locFilter, setLocFilter] = useState<string[]>([]);
   const [type, setType] = useState("All");
   const [minPrice, setMinPrice] = useState("");
