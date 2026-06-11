@@ -13,6 +13,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const contact = useSiteContent("contact", { phone: "", email: "", whatsapp: "http://wa.link/a8stio", address: "" });
   return (
     <header className="bg-surface sticky top-0 z-50 w-full border-b border-outline-variant">
       <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20 w-full">
