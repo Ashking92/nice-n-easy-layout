@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
