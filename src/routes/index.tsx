@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const HERO_IMG =
   "https://lh3.googleusercontent.com/aida/AP1WRLtRTceq5CkOCg6SFvbxexExmMlZMhZauNHrI8HVSV0tAfWjUjwFWKpJWeGhzOfVK7U-JtzsFUTaK_V_rG1Fj-8xIbu2pFLloGh1Gn8cJvbGWFV8yzz8diIBv37Hr0PONwnGT1fRsEHff2AoaWubAWLqPyFzDKgCnsemvUSqtfM9KOJlnO5LO8O2ZxFEpEBDzUkwmJNv9pi36_CrPiMPRZ9U1kKG93m_HS64Cy6lc2PIvZEn6ECq8cX6hQ";
