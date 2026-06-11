@@ -1,4 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useSiteContent } from "@/hooks/useSiteContent";
+
 
 
 const links = [
