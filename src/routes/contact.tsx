@@ -50,6 +50,12 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const contact = useSiteContent("contact", {
+    phone: "8828300415",
+    email: "ashish.budgethomes@gmail.com",
+    whatsapp: "http://wa.link/a8stio",
+    address: "Shop No. C 118, 1st Floor, C Wing,\nIcchapurti Sai Prestige CHS Ltd,\nTaki Virar Road, Near Dutt Mandir,\nNalasopara East, Palghar, Maharashtra - 401209",
+  });
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,19 +88,16 @@ function ContactPage() {
                 <h2 className="font-headline-md text-headline-md text-primary mb-8">Get In Touch</h2>
                 <div className="space-y-6">
                   <InfoItem icon="location_on" title="Office Address">
-                    Shop No. C 118, 1st Floor, C Wing,<br />
-                    Icchapurti Sai Prestige CHS Ltd,<br />
-                    Taki Virar Road, Near Dutt Mandir,<br />
-                    Nalasopara East, Palghar, Maharashtra - 401209
+                    <span className="whitespace-pre-line">{contact.address}</span>
                   </InfoItem>
-                  <InfoItem icon="call" title="Contact Number">8828300415</InfoItem>
-                  <InfoItem icon="mail" title="Email Address">ashish.budgethomes@gmail.com</InfoItem>
+                  <InfoItem icon="call" title="Contact Number">{contact.phone}</InfoItem>
+                  <InfoItem icon="mail" title="Email Address">{contact.email}</InfoItem>
                 </div>
                 <div className="mt-10 pt-8 border-t border-outline-variant">
                   <p className="font-body-md text-body-md text-on-surface-variant mb-4">For immediate assistance, connect with us on WhatsApp:</p>
                   <a
                     className="inline-flex items-center justify-center w-full bg-forest-green text-on-primary py-4 rounded-lg font-label-lg hover:opacity-95 transition-all shadow-md group"
-                    href="http://wa.link/a8stio"
+                    href={contact.whatsapp}
                     target="_blank"
                     rel="noreferrer"
                   >
