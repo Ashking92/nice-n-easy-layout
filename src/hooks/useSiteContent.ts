@@ -10,6 +10,7 @@ export function useSiteContent<T extends Record<string, any>>(key: string, defau
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["site-content", key],
+    enabled: typeof window !== "undefined",
     queryFn: async () => {
       const { data, error } = await supabase
         .from("site_content")
