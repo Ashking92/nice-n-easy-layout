@@ -1,4 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useSiteContent } from "@/hooks/useSiteContent";
+
 
 
 const links = [
@@ -11,6 +13,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const contact = useSiteContent("contact", { phone: "", email: "", whatsapp: "http://wa.link/a8stio", address: "" });
   return (
     <header className="bg-surface sticky top-0 z-50 w-full border-b border-outline-variant">
       <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20 w-full">
@@ -36,7 +39,7 @@ export function SiteHeader() {
           })}
         </nav>
         <div className="flex items-center gap-4">
-          <a href="http://wa.link/a8stio" target="_blank" rel="noreferrer" className="bg-deep-navy text-on-primary px-6 py-2.5 rounded-lg font-label-lg hover:opacity-90 active:scale-95 transition-all">
+          <a href={contact.whatsapp} target="_blank" rel="noreferrer" className="bg-deep-navy text-on-primary px-6 py-2.5 rounded-lg font-label-lg hover:opacity-90 active:scale-95 transition-all">
             List Property
           </a>
         </div>

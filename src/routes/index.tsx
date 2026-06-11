@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const HERO_IMG =
   "https://lh3.googleusercontent.com/aida/AP1WRLtRTceq5CkOCg6SFvbxexExmMlZMhZauNHrI8HVSV0tAfWjUjwFWKpJWeGhzOfVK7U-JtzsFUTaK_V_rG1Fj-8xIbu2pFLloGh1Gn8cJvbGWFV8yzz8diIBv37Hr0PONwnGT1fRsEHff2AoaWubAWLqPyFzDKgCnsemvUSqtfM9KOJlnO5LO8O2ZxFEpEBDzUkwmJNv9pi36_CrPiMPRZ9U1kKG93m_HS64Cy6lc2PIvZEn6ECq8cX6hQ";
@@ -66,6 +67,13 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const hero = useSiteContent("hero", {
+    eyebrow: "Welcome to Budget Homes",
+    title: "High Value, Affordable Living in Maharashtra",
+    subtitle: "Making home ownership a reality for everyone. Quality residences at budget-friendly prices across Nalasopara, Boisar, Palghar and beyond.",
+    cta_primary_label: "Browse Properties",
+    cta_secondary_label: "Talk to an Expert",
+  });
   return (
     <div className="bg-surface text-on-surface min-h-screen flex flex-col">
       <SiteHeader />
@@ -78,17 +86,15 @@ function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/80 to-transparent z-10" />
           <div className="relative z-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
             <div className="max-w-2xl">
-              <span className="text-warm-gold font-label-lg uppercase tracking-widest mb-4 block">Welcome to Budget Homes</span>
-              <h1 className="text-headline-xl text-on-primary font-headline-xl mb-6">High Value, Affordable Living in Maharashtra</h1>
-              <p className="text-body-lg text-on-primary/80 mb-8 max-w-lg">
-                Making home ownership a reality for everyone. Quality residences at budget-friendly prices across Nalasopara, Boisar, Palghar and beyond.
-              </p>
+              <span className="text-warm-gold font-label-lg uppercase tracking-widest mb-4 block">{hero.eyebrow}</span>
+              <h1 className="text-headline-xl text-on-primary font-headline-xl mb-6">{hero.title}</h1>
+              <p className="text-body-lg text-on-primary/80 mb-8 max-w-lg">{hero.subtitle}</p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/properties" className="bg-warm-gold text-on-primary-fixed px-8 py-4 rounded font-label-lg hover:brightness-110 transition-all">
-                  Browse Properties
+                  {hero.cta_primary_label}
                 </Link>
                 <Link to="/contact" className="border border-on-primary text-on-primary px-8 py-4 rounded font-label-lg hover:bg-on-primary hover:text-deep-navy transition-all">
-                  Talk to an Expert
+                  {hero.cta_secondary_label}
                 </Link>
               </div>
             </div>

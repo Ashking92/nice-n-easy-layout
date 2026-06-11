@@ -22,6 +22,7 @@ const propertiesQuery = {
 };
 
 export const Route = createFileRoute("/properties/")({
+  ssr: false,
   loader: ({ context }) => context.queryClient.ensureQueryData(propertiesQuery),
   head: () => ({
     meta: [

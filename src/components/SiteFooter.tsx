@@ -1,4 +1,12 @@
+import { useSiteContent } from "@/hooks/useSiteContent";
+
 export function SiteFooter() {
+  const contact = useSiteContent("contact", {
+    phone: "8828300415",
+    email: "ashish.budgethomes@gmail.com",
+    whatsapp: "http://wa.link/a8stio",
+    address: "Shop No, C 118, 1st Floor, C Wing, Icchapurti Sai Prestige CHS Ltd, Nalasopara East, Maharashtra, 401209",
+  });
   return (
     <footer className="bg-deep-navy text-on-primary">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-section-gap max-w-container-max mx-auto">
@@ -19,42 +27,41 @@ export function SiteFooter() {
         <div>
           <h4 className="text-label-lg font-bold mb-6 text-warm-gold uppercase tracking-widest">Our Services</h4>
           <ul className="space-y-4">
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">Home Buying</a></li>
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">Investment</a></li>
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">Property Management</a></li>
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">Legal Assistance</a></li>
+            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/services">Home Buying</a></li>
+            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/services">Investment</a></li>
+            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/services">Property Management</a></li>
+            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/services">Legal Assistance</a></li>
           </ul>
         </div>
         <div>
           <h4 className="text-label-lg font-bold mb-6 text-warm-gold uppercase tracking-widest">Quick Links</h4>
           <ul className="space-y-4">
             <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/properties">Properties</a></li>
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">About Us</a></li>
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">Terms of Service</a></li>
-            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="#">Privacy Policy</a></li>
+            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/about">About Us</a></li>
+            <li><a className="text-on-primary/70 hover:text-warm-gold transition-colors" href="/contact">Contact</a></li>
           </ul>
         </div>
         <div>
           <h4 className="text-label-lg font-bold mb-6 text-warm-gold uppercase tracking-widest">Contact Info</h4>
           <div className="space-y-4 text-on-primary/70">
-            <p className="flex items-start gap-3">
+            <p className="flex items-start gap-3 whitespace-pre-line">
               <span className="material-symbols-outlined text-warm-gold">location_on</span>
-              Shop No, C 118, 1st Floor, C Wing, Icchapurti Sai Prestige CHS Ltd, Nalasopara East, Maharashtra, 401209
+              {contact.address}
             </p>
             <p className="flex items-center gap-3">
               <span className="material-symbols-outlined text-warm-gold">call</span>
-              8828300415
+              {contact.phone}
             </p>
             <p className="flex items-center gap-3">
               <span className="material-symbols-outlined text-warm-gold">mail</span>
-              ashish.budgethomes@gmail.com
+              {contact.email}
             </p>
           </div>
         </div>
       </div>
       <div className="border-t border-on-primary/10 py-8 px-margin-mobile md:px-margin-desktop">
         <div className="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-on-primary/50 text-label-sm">
-          <p>© 2024 Budget Homes. All rights reserved. Nalasopara, Maharashtra.</p>
+          <p>© {new Date().getFullYear()} Budget Homes. All rights reserved. Nalasopara, Maharashtra.</p>
           <p>Designed for excellence in affordable housing.</p>
         </div>
       </div>
