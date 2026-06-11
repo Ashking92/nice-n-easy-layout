@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const MAP_IMG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuB-ig8bYRVdGbDyTrIocMYZocFyPziex_36oHL3Ol0KHg_rfj1YYb5z0mLphioFzaMU84Vxn9VpQ5zCC5Xq2fzSGougTwPhJArroOByGUT8A_g5xYMI0KWdL1ZbaOijp8YAtSf9_x2GcBfTfwTBayUsSFYp1h54Ul_NbhsAfg_8-TdRO-dAt3tQd3Qref-5aadvCTN_DRmgqTM7crZsqCbnkqqKlALbvjDXiBklF_y0HwT16unJLE0Hqhmx99TbXkF9iUNIQlCPI1E";
