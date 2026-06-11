@@ -55,6 +55,17 @@ export function fromDbRow(row: any): PropertyFormValues {
   };
 }
 
+const inputCls = "w-full border border-outline-variant rounded p-2.5 focus:border-deep-navy focus:ring-1 focus:ring-deep-navy outline-none";
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-label-lg text-on-surface-variant mb-1 text-sm">{label}</span>
+      {children}
+    </label>
+  );
+}
+
 export function PropertyForm({
   initial, onSubmit, submitLabel,
 }: { initial: PropertyFormValues; onSubmit: (v: PropertyFormValues) => Promise<void>; submitLabel: string }) {
@@ -68,13 +79,8 @@ export function PropertyForm({
     try { await onSubmit(v); } finally { setBusy(false); }
   };
 
-  const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
-    <label className="block">
-      <span className="block text-label-lg text-on-surface-variant mb-1 text-sm">{label}</span>
-      {children}
-    </label>
-  );
-  const input = "w-full border border-outline-variant rounded p-2.5 focus:border-deep-navy focus:ring-1 focus:ring-deep-navy outline-none";
+  const input = inputCls;
+
 
   return (
     <form onSubmit={submit} className="space-y-6 max-w-4xl">

@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { supabase } from "@/integrations/supabase/client";
+import { useRealtimeSubscription } from "@/hooks/useRealtimeData";
+
 
 const propertyQuery = (slug: string) => ({
   queryKey: ["property", "slug", slug],
@@ -81,8 +83,11 @@ export const Route = createFileRoute("/properties/$slug")({
 
 function PropertyDetail() {
   const { slug } = Route.useParams();
+  const qc = useQueryClient();
   const { data: p } = useQuery(propertyQuery(slug));
+  useRealtimeSubscription("properties", () => qc.invalidateQueries({ queryKey: ["property", "slug", slug] }));
   if (!p) return null;
+
 
   return (
     <div className="bg-surface text-on-surface min-h-screen flex flex-col">

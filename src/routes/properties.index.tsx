@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { supabase } from "@/integrations/supabase/client";
+import { useRealtimeSubscription } from "@/hooks/useRealtimeData";
+
 
 const propertiesQuery = {
   queryKey: ["properties", "list"],
@@ -35,7 +37,10 @@ export const Route = createFileRoute("/properties/")({
 });
 
 function PropertiesPage() {
+  const qc = useQueryClient();
   const { data: properties = [] } = useQuery(propertiesQuery);
+  useRealtimeSubscription("properties", () => qc.invalidateQueries({ queryKey: ["properties", "list"] }));
+
   const [locFilter, setLocFilter] = useState<string[]>([]);
   const [type, setType] = useState("All");
   const [minPrice, setMinPrice] = useState("");
