@@ -39,7 +39,7 @@ export function SiteHeader() {
           })}
         </nav>
         <div className="flex items-center gap-4">
-          <a href="http://wa.link/a8stio" target="_blank" rel="noreferrer" className="bg-deep-navy text-on-primary px-6 py-2.5 rounded-lg font-label-lg hover:opacity-90 active:scale-95 transition-all">
+          <a href={contact.whatsapp} target="_blank" rel="noreferrer" className="bg-deep-navy text-on-primary px-6 py-2.5 rounded-lg font-label-lg hover:opacity-90 active:scale-95 transition-all">
             List Property
           </a>
         </div>
