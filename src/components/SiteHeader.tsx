@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useAuth } from "@/hooks/useAuth";
+
 
 const links = [
   { to: "/", label: "Home" },
